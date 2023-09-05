@@ -116,7 +116,7 @@ namespace sort1{
     
 	//RADIXSORT
 void countingSort(std::vector<int>& arr, int n, int exp) {
-    int RANGE = 8;
+    int RANGE = 10;
     std::vector<int> output(n);
     int count[RANGE] = {0};
 
