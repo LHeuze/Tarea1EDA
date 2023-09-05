@@ -7,7 +7,6 @@ namespace sort1{
     void insertSort(std::vector<int>& arr);
     void merge(std::vector<int>& arr, int left, int mid, int right);
     void mergeSort(std::vector<int>& arr, int left, int right);
-    void countingSort(std::vector<int>& arr, int exp);
-    void radixSort(std::vector<int>& arr);
-    int getDigit(int num, int exp);
+    void countingSort(std::vector<int>& arr, int n, int exp);
+    void radixSort(std::vector<int>& arr, int n);
 }

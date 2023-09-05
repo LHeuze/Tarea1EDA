@@ -3,7 +3,7 @@
 #include "sorts.hpp"
 
 namespace sort1{
-        // QUICKSORT
+        // QUICKSORT (repositorio profe)
         int split_qs(std::vector<int>& A, int i, int j){
 		/***
 		 * split for quicksort
@@ -115,43 +115,36 @@ namespace sort1{
 
     
 	//RADIXSORT
-int getDigit(int num, int exp) {
-    while (exp > 0) {
-        num /= 10;
-        exp--;
-    }
-    return num % 10;
-}
+void countingSort(std::vector<int>& arr, int n, int exp) {
+    int RANGE = 8;
+    std::vector<int> output(n);
+    int count[RANGE] = {0};
 
-void countingSort(std::vector<int>& arr, int exp) {
-    const int radix = 10;
-    int n = arr.size();
-    std::vector<int> output(n), count(radix, 0);
+    for (int i = 0; i < n; i++)
+        count[(arr[i] / exp) % RANGE]++;
 
-    for (int i = 0; i < n; i++) {
-        count[getDigit(arr[i], exp)]++;
-    }
-
-    for (int i = 1; i < radix; i++) {
+    for (int i = 1; i < RANGE; i++)
         count[i] += count[i - 1];
-    }
 
     for (int i = n - 1; i >= 0; i--) {
-        int digit = getDigit(arr[i], exp);
-        output[count[digit] - 1] = arr[i];
-        count[digit]--;
+        output[count[(arr[i] / exp) % RANGE] - 1] = arr[i];
+        count[(arr[i] / exp) % RANGE]--;
     }
 
-    std::copy(output.begin(), output.end(), arr.begin());
+    for (int i = 0; i < n; i++)
+        arr[i] = output[i];
 }
 
-void radixSort(std::vector<int>& arr) {
-    int maxVal = *std::max(arr.begin(), arr.end());
-    int exp = 1;
+void radixSort(std::vector<int>& arr, int n) {
+    int maxNum = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > maxNum) {
+            maxNum = arr[i];
+        }
+    }
 
-    while (maxVal / exp > 0) {
-        countingSort(arr, exp);
-        exp *= 10;
+    for (int exp = 1; maxNum / exp > 0; exp *= 10) {
+        countingSort(arr, n, exp);
     }
 }
 

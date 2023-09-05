@@ -20,12 +20,15 @@ int main (){
     
     cout << "Ingrese nombre del archivo a leer: ";
     cin >> Narchivo;
-    Narchivo = "../"+Narchivo;
+    Narchivo = "../datos/"+Narchivo;
+    
+ 
     string salida = Narchivo+".sorted";
     
     
     cout << "Ingrese tipo de sort: ";
     cin >> tipoSort;
+
     
     // Sacar datos de archivo de inputs y ponerlos en vector RUTs
     archivo.open(Narchivo);
@@ -55,7 +58,7 @@ int main (){
         sort1::mergeSort(RUTs,0,RUTs.size()-1);
     }
     else if (tipoSort == "R"){
-        sort1::radixSort(RUTs);
+        sort1::radixSort(RUTs,RUTs.size());
     }
     
     auto end = chrono::high_resolution_clock::now();
@@ -65,10 +68,12 @@ int main (){
     
     
     // Copiar vector RUTs a archivo de salida
+    
     ofstream Sarchivo(salida);
     for(int i = 0; i<RUTs.size();i++){
         Sarchivo << RUTs[i]<< endl;
     }
     Sarchivo.close();
+    
     return 0;
 }
