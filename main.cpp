@@ -48,6 +48,7 @@ int main (){
     
     // Algoritmo 
     auto start = chrono::high_resolution_clock::now();
+    
     if (tipoSort == "Q"){
         sort1::quickSort(RUTs,0,RUTs.size());
     }

@@ -4,9 +4,9 @@
 namespace sort1{
     int split_qs(std::vector<int>& A, int i, int j);
     void quickSort(std::vector<int>& A, int i, int j);
-    void insertSort(std::vector<int>& arr);
-    void merge(std::vector<int>& arr, int left, int mid, int right);
-    void mergeSort(std::vector<int>& arr, int left, int right);
-    void countingSort(std::vector<int>& arr, int n, int exp);
-    void radixSort(std::vector<int>& arr, int n);
+    void insertSort(std::vector<int>& A);
+    void merge(std::vector<int>& A, int ini, int medio, int fin);
+    void mergeSort(std::vector<int>& A, int ini, int fin);
+    void countingSort(std::vector<int>& A, int n, int exp);
+    void radixSort(std::vector<int>& A, int n);
 }

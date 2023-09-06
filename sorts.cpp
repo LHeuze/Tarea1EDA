@@ -46,105 +46,105 @@ namespace sort1{
 	}*/
     
    
-    // INSERTSORT
-    void insertSort(std::vector<int>& arr) {
-    int n = arr.size();
+    // INSERTSORT apuntes profe
+    void insertSort(std::vector<int>& A) {
+    int n = A.size();
 
     for (int i = 1; i < n; i++) {
-        int key = arr[i];
+        int elem = A[i];
         int j = i - 1;
 
-        while (j >= 0 && key < arr[j]) {
-            arr[j + 1] = arr[j];
+        while (j >= 0 && elem < A[j]) {
+            A[j + 1] = A[j];
             j--;
         }
 
-        arr[j + 1] = key;
+        A[j + 1] = elem;
     }
 	}
     
-	//MERGESORT
-	void merge(std::vector<int>& arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+	//MERGESORT sacado del libro guia , apuntes del profe
+	void merge(std::vector<int>& A, int ini, int medio, int fin) {
+    int n1 = medio - ini + 1;
+    int n2 = fin - medio;
 
-    std::vector<int> leftArr(n1);
-    std::vector<int> rightArr(n2);
+    std::vector<int> iniA(n1);
+    std::vector<int> finA(n2);
 
     for (int i = 0; i < n1; i++) {
-        leftArr[i] = arr[left + i];
+        iniA[i] = A[ini + i];
     }
 
     for (int i = 0; i < n2; i++) {
-        rightArr[i] = arr[mid + 1 + i];
+        finA[i] = A[medio + 1 + i];
     }
 
-    int i = 0, j = 0, k = left;
+    int p1 = 0, p2 = 0, q = ini;
 
-    while (i < n1 && j < n2) {
-        if (leftArr[i] < rightArr[j]) {
-            arr[k] = leftArr[i];
-            i++;
+    while (p1 < n1 && p2 < n2) {
+        if (iniA[p1] < finA[p2]) {
+            A[q] = iniA[p1];
+            p1++;
         } else {
-            arr[k] = rightArr[j];
-            j++;
+            A[q] = finA[p2];
+            p2++;
         }
-        k++;
+        q++;
     }
 
-    while (i < n1) {
-        arr[k] = leftArr[i];
-        i++;
-        k++;
+    while (p1 < n1) {
+        A[q] = iniA[p1];
+        p1++;
+        q++;
     }
 
-    while (j < n2) {
-        arr[k] = rightArr[j];
-        j++;
-        k++;
+    while (p2 < n2) {
+        A[q] = finA[p2];
+        p2++;
+        q++;
     }
 	}
-    void mergeSort(std::vector<int>& arr, int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        merge(arr, left, mid, right);
+    void mergeSort(std::vector<int>& A, int ini, int fin) {
+    if (ini < fin) {
+        int medio = ini + (fin - ini) / 2;
+        mergeSort(A, ini, medio);
+        mergeSort(A, medio + 1, fin);
+        merge(A, ini, medio, fin);
     }
 }
 
     
 	//RADIXSORT
-void countingSort(std::vector<int>& arr, int n, int exp) {
-    int RANGE = 10;
+void countingSort(std::vector<int>& A, int n, int exp) {
+    int rango = 10;
     std::vector<int> output(n);
-    int count[RANGE] = {0};
+    int count[rango] = {0}; // lleva la cuenta del digito en el que se esta
 
     for (int i = 0; i < n; i++)
-        count[(arr[i] / exp) % RANGE]++;
+        count[(A[i] / exp) % rango]++;
 
-    for (int i = 1; i < RANGE; i++)
+    for (int i = 1; i < rango; i++)
         count[i] += count[i - 1];
 
     for (int i = n - 1; i >= 0; i--) {
-        output[count[(arr[i] / exp) % RANGE] - 1] = arr[i];
-        count[(arr[i] / exp) % RANGE]--;
+        output[count[(A[i] / exp) % rango] - 1] = A[i];
+        count[(A[i] / exp) % rango]--;
     }
 
     for (int i = 0; i < n; i++)
-        arr[i] = output[i];
+        A[i] = output[i];
 }
 
-void radixSort(std::vector<int>& arr, int n) {
-    int maxNum = arr[0];
+void radixSort(std::vector<int>& A, int n) {
+    int maxNum = A[0];
     for (int i = 1; i < n; i++) {
-        if (arr[i] > maxNum) {
-            maxNum = arr[i];
+        if (A[i] > maxNum) {
+            maxNum = A[i];
         }
     }
 
     for (int exp = 1; maxNum / exp > 0; exp *= 10) {
-        countingSort(arr, n, exp);
+        countingSort(A, n, exp);
     }
 }
 
